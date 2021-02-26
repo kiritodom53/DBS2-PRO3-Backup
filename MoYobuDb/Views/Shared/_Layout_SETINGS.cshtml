@@ -1,0 +1,57 @@
+﻿@* @using Microsoft.AspNetCore.Identity *@
+@* *@
+@* @inject SignInManager<IdentityUser> SignInManager *@
+@* @inject UserManager<IdentityUser> UserManager *@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/body.css"/>
+    <link rel="stylesheet" href="~/css/header.css"/>
+    <link rel="stylesheet" href="~/css/livesearchOverlay.css"/>
+    <link rel="stylesheet" href="~/css/edit.css"/>
+    @* <link rel="stylesheet" href="~/css/anime.css"/> *@
+    @* <link rel="stylesheet" href="~/css/site.css"/> *@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/24043e2d5b.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    @* <script type="text/javascript" src="~/js/boot.js"></script> *@
+    @* <script type="text/javascript" src="~/js/anime.js"></script> *@
+    <script src="~/js/livesearchOverlay.js"></script>
+    <script src="~/js/edit.js"></script>
+    @* <script src="~/js/anime.js"></script> *@
+</head>
+<body>
+<partial name="_Menu"/>
+<div class="edit-content">
+    <div class="edit-container">
+        <nav>
+            <a href="/Identity/Account/Manage">Profil</a>
+            <a id="change-password" href="/Identity/Account/Manage/ChangePassword">Změnit heslo</a>
+            <a asp-controller="User" asp-action="EditProfile">Edit profil</a>
+            <a asp-controller="User" asp-action="EditProfileImg">Edit obrázek</a>
+            @* <a asp-controller="User" asp-action="EditProfileImg"></a> *@
+@*             @if (SignInManager.IsSignedIn(User) && !User.IsInRole("Reviewer")) *@
+@*             { *@
+@*             $1$         <a asp-controller="Reviews" asp-action="AskForRights">Žádost o práva na recenzování</a> #1# *@
+@* $1$                     <form asp-controller="User" asp-action="AskForRights" asp-route-userId="@Model.userId"> #1# *@
+@* $1$                         <input type="submit" value="Požádat o možnost recenzovat" class="btn btn-default"/> #1# *@
+@* $1$                     </form> #1# *@
+@*             } *@
+@*             else if (User.IsInRole("Reviewer")) *@
+@*             { *@
+@*                 <span>Máte práva recenzovat</span> *@
+@*             } *@
+
+            @* <a asp-page="./TwoFactorAuthentication">Dvoufázové ověřování</a> *@
+            @* <a asp-page="./PersonalData">Osobní data</a> *@
+        </nav>
+        @RenderBody()
+    </div>
+</div>
+
+@RenderSection("Scripts", required: false)
+<partial name="_Footer"/>
+</body>
+</html>

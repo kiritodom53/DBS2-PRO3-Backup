@@ -1,0 +1,175 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@* <nav class="navbar navbar-inverse navbar-fixed-top" style="position:absolute;"> *@
+@*     <div class="container"> *@
+@*         <div class="navbar-header"> *@
+@*             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> *@
+@*                 <span class="sr-only">Toggle navigation</span> *@
+@*                 <span class="icon-bar"></span> *@
+@*                 <span class="icon-bar"></span> *@
+@*                 <span class="icon-bar"></span> *@
+@*             </button> *@
+@*             <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">MoYobuDb</a> *@
+@*         </div> *@
+@*         <div class="navbar-collapse collapse"> *@
+@*             <ul class="nav navbar-nav"> *@
+@*                 <li> *@
+@*                     <a asp-area="" asp-controller="Home" asp-action="Index">Home</a> *@
+@*                 </li> *@
+@*                 <li> *@
+@*                     <a asp-area="" asp-controller="Home" asp-action="About">About</a> *@
+@*                 </li> *@
+@*                 $1$ <li> #1# *@
+@*                 $1$ <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a> #1# *@
+@*                 $1$ </li> #1# *@
+@*                 <li> *@
+@*                     <a asp-area="" asp-controller="Browse" asp-action="Studios">Studios</a> *@
+@*                 </li> *@
+@*                 <li> *@
+@*                     <a asp-area="" asp-controller="Browse" asp-action="Anime">Animes</a> *@
+@*                 </li> *@
+@*                 <li> *@
+@*                     <a asp-area="" asp-controller="Browse" asp-action="Manga">Manga</a> *@
+@*                 </li> *@
+@*                 <li> *@
+@*                     <a asp-area="" asp-controller="Characters" asp-action="Index">Characters</a> *@
+@*                 </li> *@
+@*                 <li> *@
+@*                     <a asp-area="" asp-controller="Stats" asp-action="Index">Stats</a> *@
+@*                 </li> *@
+@*                 $1$ <li><a asp-area="" asp-controller="AnimeCharacters" asp-action="Index">Anime Characters</a></li> #1# *@
+@*                 <li> *@
+@*                     <a asp-area="" asp-controller="User" asp-action="Index">User</a> *@
+@*                 </li> *@
+@*                 <li> *@
+@*                     <a asp-area="" asp-controller="Administration" asp-action="Index">Administrace</a> *@
+@*                 </li> *@
+@*             </ul> *@
+@*             <partial name="_LoginPartial"/> *@
+@*         </div> *@
+@*     </div> *@
+@* </nav> *@
+<header>
+    <nav>
+        <a asp-area="" asp-controller="Home" asp-action="Index" id="logo">
+            <img src="~/images/LogoSmall2.svg" alt="LogoSmall"/>
+        </a>
+        <div class="butons">
+            <a asp-area="" asp-controller="Stats" asp-action="Index" class="buton">
+                <img src="~/images/Statistiky.svg" alt="Statistiky"/>
+            </a>
+            @* <a asp-controller="Browse" asp-action="Anime" class="buton"> *@
+            @*     <img src="~/images/BtnBrows.svg" alt="Browse"/> *@
+            @* </a> *@
+            <div class="nav buton">
+                <ul>
+                    <li>
+                        <img src="~/images/BtnBrows.svg" alt="BtnBrows"/>
+                        <ul>
+                            <li>
+                                <a asp-controller="Browse" asp-action="Anime" class="drop">
+                                    Anime
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-controller="Browse" asp-action="Manga" class="drop">
+                                    Manga
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-controller="Browse" asp-action="Studios" class="drop">
+                                    Studio
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a asp-controller="User" asp-action="AnimeList" asp-route-userName="@UserManager.GetUserName(User)" asp-route-listName="All" class="buton">
+                    <img src="~/images/AnimeListBtn.svg" alt="AnimeList"/>
+                </a>
+                <a asp-controller="User" asp-action="MangaList" asp-route-userName="@UserManager.GetUserName(User)" asp-route-listName="All" class="buton">
+                    <img src="~/images/MaingaListBtn.svg" alt="MangaList"/>
+                </a>
+            }
+            <div class="nav buton">
+                <a asp-controller="User" asp-action="Index" asp-route-username="" class="profil">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <img src="~/@UserManager.GetUserAsync(User).Result.ProfileImage" alt="User profile"/>
+                }
+                else
+                {
+                    <img src="~/images/default-profil-ico.svg" alt="User profile"/>
+                }
+                </a>
+                <ul>
+                    <li>
+                        <div>
+                            <img src="~/images/arrow-down.svg" alt="User profile" class="arr"/>
+                        </div>
+                        <ul class="arr">
+                            <li>
+
+                                <a asp-controller="User" asp-action="Index" asp-route-username="" class="drop">
+                                    Profil
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Identity/Account/Manage" class="drop">
+                                    Nastavení
+                                </a>
+                            </li>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <li>
+                                    <a class="drop">
+                                        <button type="submit" form="logoutForm" class="submitLink">Logout</button>
+                                    </a>
+                                </li>
+                            }
+                            @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                            {
+                                <li>
+                                    <a asp-controller="Administration" asp-action="Index" class="drop">
+                                        Administrace
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <img class="search" src="~/images/ic_search.svg" alt="Search"/>
+        </div>
+    </nav>
+</header>
+<div class="search-background">
+    <div class="search-background exit z1"></div>
+
+    <div class="search-overlay">
+        <input class="z2" type="search" id="searchBox" placeholder="Co to dnes bude?"/>
+        <div class="exit z2 X">X</div>
+        <div class="search-results">
+            <div>
+                <h2 class="z2">Anime</h2>
+                <div class="search-anime"></div>
+            </div>
+            <div>
+                <h2 class="z2">Manga</h2>
+                <div class="search-manga"></div>
+            </div>
+            <div>
+                <h2 class="z2">Studia</h2>
+                <div class="search-studio"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<form hidden="hidden" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})" method="post" id="logoutForm" class="navbar-right">
+
+</form>

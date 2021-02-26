@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/email_aprrove.css"/>
+    <link rel="stylesheet" href="~/css/body.css"/>
+        <link rel="stylesheet" href="~/css/header.css"/>
+        <link rel="stylesheet" href="~/css/livesearchOverlay.css"/>
+    <link
+        href="https://fonts.googleapis.com/css?family=Russo+One&display=swap"
+        rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="~/js/livesearchOverlay.js"></script>
+</head>
+<body>
+<partial name="_Menu"/>
+
+<div class="content">
+    <div class="reg-login">
+        @RenderBody()
+    </div>
+</div>
+@RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,65 @@
+﻿@model MoYobuDb.Models.Tables.Character
+
+@{
+    ViewData["Title"] = "Editovat postavu";
+    Layout = "_Layout_FORMS";
+}
+
+<form enctype="multipart/form-data" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="characterId"/>
+             <div class="form-group">
+                        <div class="file">
+                            <div>
+                                <label for="image_uploads">Zvolte soubor</label>
+                                <input class="file-input"
+                                       type="file"
+                                       id="image_uploads"
+                                       name="image_uploads"
+                                       accept=".jpg, .jpeg, .png"
+                                       asp-for="characterImg">
+                                <span asp-validation-for="characterImg"></span>
+                            </div>
+                            <div class="preview">
+                                <p>Žádný soubor nebyl zvolen</p>
+                            </div>
+                        </div>
+                    </div>
+            <div class="form-group">
+                <label asp-for="name" class="control-label"></label>
+                <input asp-for="name" class="form-control"/>
+                <span asp-validation-for="name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="nameNative" class="control-label"></label>
+                <input asp-for="nameNative" class="form-control"/>
+                <span asp-validation-for="nameNative" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="surname" class="control-label"></label>
+                <input asp-for="surname" class="form-control"/>
+                <span asp-validation-for="surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="surnameNative" class="control-label"></label>
+                <input asp-for="surnameNative" class="form-control"/>
+                <span asp-validation-for="surnameNative" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="description" class="control-label"></label>
+                <input asp-for="description" class="form-control"/>
+                <span asp-validation-for="description" class="text-danger"></span>
+            </div>
+            @* <div class="form-group"> *@
+            @*     <label asp-for="voiceActorId" class="control-label"></label> *@
+            @*     <select asp-for="voiceActorId" class="form-control" asp-items="ViewBag.voiceActorId"></select> *@
+            @*     <span asp-validation-for="voiceActorId" class="text-danger"></span> *@
+            @* </div> *@
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default"/>
+            </div>
+        </form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

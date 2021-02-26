@@ -1,0 +1,7 @@
+<svg viewBox="0 0 100 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 25V3H50 " stroke="#B00038" stroke-width="5" stroke-linejoin="round"/>
+<text x="50%" y="55%" fill="white" text-anchor="middle">
+    MoYoBudb
+</text>
+<path d="M97 25V47H50" stroke="#B00038" stroke-width="5" stroke-linejoin="round"/>
+</svg>

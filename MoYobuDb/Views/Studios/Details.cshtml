@@ -1,0 +1,41 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model MoYobuDb.Models.Tables.Studio
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Studio";
+    Layout = "_Layout_STUDIOS";
+}
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+
+{
+    <a asp-controller="Studios" asp-action="Edit" asp-route-id="@Model.studioId">
+        <h1>@Html.DisplayFor(model => model.name)</h1>
+    </a>
+}
+else
+{
+    <h1>@Html.DisplayFor(model => model.name)</h1>
+}
+<div class="brows">
+    @foreach (var item in Model.animes)
+    {
+        <a asp-controller="Animes" asp-action="Details" asp-route-id="@item.animeId" asp-route-name="@item.romajiTitle">
+            <div class="img-box">
+                @if (item.coverImage == null)
+                {
+                    <img src="~/images/noimg.png" alt="Voice actor"/>
+                }
+                else if (item.coverImage.Split("/")[0] == "uploads")
+                {
+                    <img src="~/@item.coverImage" alt="Voice actor"/>
+                }
+                else
+                {
+                    <img src="@item.coverImage" alt="Voice actor"/>
+                }
+                <p>@Html.DisplayFor(model => item.romajiTitle)</p>
+            </div>
+        </a>
+    }
+</div>

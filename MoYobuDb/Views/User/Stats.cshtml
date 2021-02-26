@@ -1,0 +1,94 @@
+﻿@model MoYobuDb.Models.Tables.Charts.UserStats
+
+@{
+    ViewData["Title"] = "Statistiky";
+    Layout = "_Layout_USER2";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+
+<div class="stats-content">
+    <div class="stat-ico">
+        <div class="point">
+            <i class="fas fa-book"></i>
+            <div>
+                <p>Dokončeno anime</p>
+                <p>@Html.DisplayFor(model => model.userAnimeStats.completedAnime)</p>
+            </div>
+        </div>
+        <div class="point">
+            <i class="fas fa-book-dead"></i>
+            <div>
+                <p>Dropnuto anime</p>
+                <p>@Html.DisplayFor(model => model.userAnimeStats.dropedAnime)</p>
+            </div>
+        </div>
+        <div class="point">
+            <i class="fas fa-bookmark"></i>
+            <div>
+                <p>Dokoukáno epizod</p>
+                <p>@Html.DisplayFor(model => model.userAnimeStats.completedEpisodes)</p>
+            </div>
+        </div>
+        <div class="point">
+            <i class="far fa-calendar-alt"></i>
+            <div>
+                <p>Sledováno dnů</p>
+                <p>@Html.DisplayFor(model => model.userAnimeStats.watchedDays)</p>
+            </div>
+        </div>
+        <div class="point">
+            <i class="fas fa-hourglass-half"></i>
+            <div>
+                <p>Plánovaných dnů</p>
+                <p>@Html.DisplayFor(model => model.userAnimeStats.planedDays)</p>
+            </div>
+        </div>
+    </div>
+    <div class="chart-box">
+        <canvas id="myChart"></canvas>
+    </div>
+    <br>
+    <div class="stat-ico">
+        <div class="point">
+            <i class="fas fa-book"></i>
+            <div>
+                <p>Přečteno mangy</p>
+                <p>@Html.DisplayFor(model => model.userMangaStats.readManga)</p>
+            </div>
+        </div>
+        <div class="point">
+            <i class="fas fa-book-dead"></i>
+            <div>
+                <p>Dropnuto mangy</p>
+                <p>@Html.DisplayFor(model => model.userMangaStats.dropedManga)</p>
+            </div>
+        </div>
+        <div class="point">
+            <i class="fas fa-bookmark"></i>
+            <div>
+                <p>Přečteno kapitol</p>
+                <p>@Html.DisplayFor(model => model.userMangaStats.readChapters)</p>
+            </div>
+        </div>
+        <div class="point">
+            <i class="far fa-calendar-alt"></i>
+            <div>
+                <p>Přečteno dnů</p>
+                <p>@Html.DisplayFor(model => model.userMangaStats.readDays)</p>
+            </div>
+        </div>
+        <div class="point">
+            <i class="fas fa-hourglass-half"></i>
+            <div>
+                <p>Plánovaných dnů</p>
+                <p>@Html.DisplayFor(model => model.userMangaStats.planedDays)</p>
+            </div>
+        </div>
+    </div>
+    <div class="chart-box">
+        <canvas id="myChart2"></canvas>
+    </div>
+
+</div>

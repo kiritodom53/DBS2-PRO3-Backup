@@ -1,0 +1,23 @@
+﻿@model MoYobuDb.Models.Tables.Review
+
+@{
+    ViewData["Title"] = "Recenze";
+    Layout = "_Layout_REVIEW";
+}
+
+<form action="#" method="post" id="edit"></form>
+<form action="#" method="post" id="del"></form>
+@* <div class="btns"> *@
+@*     <input class="edit" type="submit" value="Upravit"/> *@
+@*     <input class="delete" type="submit" value="Smazat"/> *@
+@* </div> *@
+<h2>@Html.DisplayFor(model => model.title)</h2>
+<h3>Skóre: @Html.DisplayFor(model => model.score)/10</h3>
+<p>
+    @Html.DisplayFor(model => model.content)
+</p>
+<p class="autor">
+    <a asp-controller="User" asp-action="Index" asp-route-username="@Model.user.username">
+        @Html.DisplayFor(model => model.user.username)
+    </a>
+</p>

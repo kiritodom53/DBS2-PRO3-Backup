@@ -1,0 +1,26 @@
+﻿@model MoYobuDb.Models.Tables.Manga
+
+@{
+    ViewData["Title"] = "Staffs";
+    Layout = "_Layout_MANGA";
+}
+
+<div class="overview">
+    <div class="category">
+        <h3>
+            <a asp-action="Staffs" asp-route-id="@Model.mangaId" @Model.romajiTitle>Kdo na tom pracoval</a>
+        </h3>
+        <div class="category-wrap voice">
+            @if (Model.staffs.Count > 0)
+            {
+                for (int i = 0; i < Model.staffs.Count; i++)
+                {
+                    <div class="img-box">
+                        <p class="name">@Html.DisplayFor(model => model.staffs[i].nameNative)</p>
+                        <img src="~/images/noimg.png" alt="Charakter"/>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

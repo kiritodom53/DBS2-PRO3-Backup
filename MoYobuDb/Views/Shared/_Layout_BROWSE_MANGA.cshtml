@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/body.css"/>
+    <link rel="stylesheet" href="~/css/header.css"/>
+    <link rel="stylesheet" href="~/css/brows.css"/>
+    <link rel="stylesheet" href="~/css/list.css"/>
+    <link rel="stylesheet" href="~/css/livesearchOverlay.css"/>
+    <title>@ViewData["Title"]</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/24043e2d5b.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script src="~/js/livesearchOverlay.js"></script>
+    <script src="~/js/browse.js"></script>
+    <script src="~/js/browse-filter.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"
+        integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk="
+        crossorigin="anonymous"></script>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css"
+        integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg="
+        crossorigin="anonymous"/>
+</head>
+<body>
+<partial name="_Menu"/>
+<div class="browse-content">
+    <div class="tg-wrap">
+        <form class="form" method="get"
+              asp-controller="Browse"
+              asp-action="Manga">
+            <input name="page" type="hidden" value="1"/>
+            <select name="format" asp-items="ViewBag.format" id="select-state" placeholder="Formát">
+                <option value="">Formát</option>
+            </select>
+            <select name="status" asp-items="ViewBag.status">
+                <option value="">Status</option>
+            </select>
+            <select name="score" asp-items="ViewBag.score">
+                <option value="">Skóre</option>
+            </select>
+            <input type="image" src="~/images/ic_search.svg" class="search-btn-ico"/>
+        </form>
+        <div class="brows">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+@RenderSection("Scripts", required: false)
+<partial name="_Footer"/>
+</body>
+</html>

@@ -1,0 +1,127 @@
+﻿@model MoYobuDb.Models.Tables.Anime
+
+@{
+    ViewData["Title"] = "Vytvořit anime";
+    Layout = "_Layout_FORMS";
+}
+
+
+<form enctype="multipart/form-data" asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="romajiTitle" class="control-label"></label>
+        <input asp-for="romajiTitle" class="form-control"/>
+        <span asp-validation-for="romajiTitle" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="japaneseTitle" class="control-label"></label>
+        <input asp-for="japaneseTitle" class="form-control"/>
+        <span asp-validation-for="japaneseTitle" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="englishTitle" class="control-label"></label>
+        <input asp-for="englishTitle" class="form-control"/>
+        <span asp-validation-for="englishTitle" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="description" class="control-label"></label>
+        <input asp-for="description" class="form-control"/>
+        <span asp-validation-for="description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <div class="file">
+            <div>
+                <label for="image_uploads">Zvolte soubor</label>
+                <input class="file-input"
+                       type="file"
+                       id="image_uploads"
+                       name="image_uploads"
+                       accept=".jpg, .jpeg, .png"
+                       asp-for="animeImg">
+                <span asp-validation-for="animeImg"></span>
+            </div>
+            <div class="preview">
+                <p>Žádný soubor nebyl zvolen</p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="format" class="control-label"></label>
+        <input asp-for="format" class="form-control"/>
+        <span asp-validation-for="format" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="episodes" class="control-label"></label>
+        <input asp-for="episodes" class="form-control"/>
+        <span asp-validation-for="episodes" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="episodeDuration" class="control-label"></label>
+        <input asp-for="episodeDuration" class="form-control"/>
+        <span asp-validation-for="episodeDuration" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="status" class="control-label"></label>
+        <input asp-for="status" class="form-control"/>
+        <span asp-validation-for="status" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="startDate" class="control-label"></label>
+        <input asp-for="startDate" class="form-control"/>
+        <span asp-validation-for="startDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="endDate" class="control-label"></label>
+        <input asp-for="endDate" class="form-control"/>
+        <span asp-validation-for="endDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="season" class="control-label"></label>
+        <input asp-for="season" class="form-control"/>
+        <span asp-validation-for="season" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="averageScore" class="control-label"></label>
+        <input asp-for="averageScore" class="form-control"/>
+        <span asp-validation-for="averageScore" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="source" class="control-label"></label>
+        <input asp-for="source" class="form-control"/>
+        <span asp-validation-for="source" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="hashtag" class="control-label"></label>
+        <input asp-for="hashtag" class="form-control"/>
+        <span asp-validation-for="hashtag" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="anilistId" class="control-label"></label>
+        <input asp-for="anilistId" class="form-control"/>
+        <span asp-validation-for="anilistId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="malId" class="control-label"></label>
+        <input asp-for="malId" class="form-control"/>
+        <span asp-validation-for="malId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="studioId" class="control-label"></label>
+        <select asp-for="studioId" class="form-control"
+                asp-items="ViewBag.studioId" id="select-state" placeholder="Vyber studio">
+            <option value="">Vyber studio</option>
+        </select>
+        <span asp-validation-for="studioId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-default"/>
+    </div>
+</form>
+@* *@
+@* <div> *@
+@*     <a asp-controller="Browse" asp-action="Anime">Back to List</a> *@
+@* </div> *@
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

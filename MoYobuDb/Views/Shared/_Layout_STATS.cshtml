@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/boot.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <link rel="stylesheet" href="~/css/body.css"/>
+    <link rel="stylesheet" href="~/css/main.css"/>
+    <link rel="stylesheet" href="~/css/header.css"/>
+    <link rel="stylesheet" href="~/css/stats.css"/>
+    <link rel="stylesheet" href="~/css/livesearchOverlay.css"/>
+    <script src="https://kit.fontawesome.com/24043e2d5b.js" crossorigin="anonymous"></script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - MoYobuDb</title>
+
+    <environment include="Development">
+        @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.csss"/> *@
+        <link rel="stylesheet" href="~/css/site.css"/>
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.csss"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"/>
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true"/>
+    </environment>
+
+    <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+
+    @*<script src="~/js/main.js"></script>*@
+    <script src="~/js/profil.js"></script>
+    <script src="~/js/livesearchOverlay.js"></script>
+    <script src="~/js/charts.js"></script>
+
+
+</head>
+<body>
+<partial name="_Menu"/>
+
+<partial name="_CookieConsentPartial"/>
+@RenderBody()
+
+<environment include="Development">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</environment>
+<environment exclude="Development">
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+            asp-fallback-test="window.jQuery"
+            crossorigin="anonymous"
+            integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+            crossorigin="anonymous"
+            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
+        </script>
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+</environment>
+
+@RenderSection("Scripts", required: false)
+<partial name="_Footer"/>
+</body>
+</html>

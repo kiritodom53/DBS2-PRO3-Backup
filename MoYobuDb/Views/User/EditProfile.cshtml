@@ -1,0 +1,34 @@
+﻿@model MoYobuDb.Models.Tables.User
+
+@{
+    ViewData["Title"] = "Editovat profil";
+    Layout = "_Layout_SETINGS";
+}
+
+
+        <form asp-action="EditProfile">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="userId"/>
+            @* <div class="form-group"> *@
+            @*     <label asp-for="username" class="control-label"></label> *@
+            @*     <input asp-for="username" class="form-control"/> *@
+            @*     <span asp-validation-for="username" class="text-danger"></span> *@
+            @* </div> *@
+            <div class="form-group">
+                <label asp-for="desciption" class="control-label"></label>
+                <input asp-for="desciption" class="form-control"/>
+                @* <span asp-validation-for="desciption" class="text-danger"></span> *@
+            </div>
+            @* <div class="form-group"> *@
+                @* <label asp-for="userAspId" class="control-label"></label> *@
+                <input asp-for="userAspId" type="hidden" class="form-control"/>
+                @* <span asp-validation-for="userAspId" class="text-danger"></span> *@
+            @* </div> *@
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default"/>
+            </div>
+        </form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

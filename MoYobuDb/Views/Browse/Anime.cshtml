@@ -1,0 +1,94 @@
+﻿@model IEnumerable<MoYobuDb.Models.Tables.Anime>
+@{
+    ViewData["Title"] = "Prohlížení anime";
+    Layout = "_Layout_BROWSE";
+    var tempPage = Convert.ToInt32(Context.Request.Query["page"]);
+}
+@* <div class="img-box"> *@
+@*     <img src="~/uploads/animeImg/68622450_p0.jpg" alt="coverImg"/> *@
+@*     <p>Log Horizon</p> *@
+@* </div> *@
+
+@foreach (var item in Model)
+{
+    <a asp-controller="Animes" asp-action="Details" asp-route-id="@item.animeId" asp-route-name="@item.romajiTitle">
+        <div class="img-box">
+                @if (item.coverImage == null)
+                {
+                    <img src="~/images/noimg.png" alt="Voice actor"/>
+                }
+                else if (item.coverImage.Split("/")[0] == "uploads")
+                {
+                    <img src="~/@item.coverImage" alt="Voice actor"/>
+                }
+                else
+                {
+                    <img src="@item.coverImage" alt="Voice actor"/>
+                }
+        @*         @if (item.coverImage != null) *@
+        @*         { *@
+        @*             <img src="~/@item.coverImage" alt="coverImg"/> *@
+        @*         } *@
+        @*         else *@
+        @*         { *@
+        @*             <img src="https://s4.anilist.co/file/anilistcdn/character/large/default.jpg" alt="coverImg"/> *@
+        @*         } *@
+        
+                <p>@Html.DisplayFor(model => item.romajiTitle)</p>
+            </div>
+    </a>
+}
+<partial name="_Paginace"/>
+
+@* <h2>Index</h2> *@
+@* *@
+@* <p> *@
+@*     $1$<a asp-action="Create">Create New</a>#1# *@
+@* </p> *@
+@* <table class="table"> *@
+@*     <thead> *@
+@*     <tr> *@
+@*         <th> *@
+@*             @Html.DisplayNameFor(model => model.englishTitle) *@
+@*         </th> *@
+@*         <th> *@
+@*             @Html.DisplayNameFor(model => model.romajiTitle) *@
+@*         </th> *@
+@*         <th> *@
+@*             @Html.DisplayNameFor(model => model.studio.name) *@
+@*         </th> *@
+@*         <th> *@
+@*             @Html.DisplayNameFor(model => model.studioId) *@
+@*         </th> *@
+@*     </tr> *@
+@*     </thead> *@
+@*     <tbody> *@
+@*     @foreach (var item in Model) *@
+@*     { *@
+@*         <tr> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.englishTitle) *@
+@*             </td> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.romajiTitle) *@
+@*             </td> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.studio.name) *@
+@*             </td> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.studioId) *@
+@*             </td> *@
+@*             <td> *@
+@*                 $1$<a asp-action="Edit" asp-route-id="@item.studioId">Edit</a> |#1# *@
+@*                 <a asp-controller="Animes" asp-action="Details" asp-route-id="@item.animeId" asp-route-name="@item.romajiTitle.Replace(' ', '-')">Details</a>@* | *@
+@*                     <a asp-action="Delete" asp-route-id="@item.studioId">Delete</a>*@
+@*             </td> *@
+@*         </tr> *@
+@*     } *@
+@*     </tbody> *@
+@* </table> *@
+@* <br> *@
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+}

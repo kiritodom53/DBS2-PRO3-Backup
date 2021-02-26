@@ -1,0 +1,77 @@
+﻿.background-about {
+    width: 80%;
+    background-color: #191919;
+    height: 100%;
+    padding: 2rem;
+    margin: auto;
+    grid-column: 2;
+}
+
+.background-about .container-about {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (minmax(246px, 1fr))[auto-fill];
+    grid-template-columns: repeat(auto-fill, minmax(246px, 1fr));
+    grid-gap: 2rem;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.background-about .container-about .about-profil {
+    margin: 0 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.background-about .container-about .about-profil img {
+    border-radius: 100%;
+    background-color: #222;
+    padding: 0.5rem;
+    margin: 0 auto;
+}
+
+.background-about .container-about .about-profil .about-info {
+    margin-top: 1rem;
+    padding: 1rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background-color: #222;
+    border-radius: 3px;
+}
+
+.background-about .container-about .about-profil .about-info h3 {
+    margin: 0;
+}
+
+.background-about .container-about .about-profil .about-info p {
+    padding-left: 1rem;
+}
+
+.background-about .container-about .about-profil .about-info .kontakty {
+    padding-left: 1rem;
+    vertical-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+
+.background-about .container-about .about-profil .about-info .kontakty img {
+    border-radius: 0;
+    height: 2rem;
+    margin: auto 0;
+}
+/*# sourceMappingURL=style.css.map */

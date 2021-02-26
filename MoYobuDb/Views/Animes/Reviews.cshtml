@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model MoYobuDb.Models.Tables.Anime
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    ViewData["Title"] = "Recenze";
+    Layout = "_Layout_ANIME";
+}
+
+<div class="overview">
+    <div class="category">
+        <h3 class="rew-head">
+            <a asp-action="Reviews" asp-route-id="@Model.animeId" asp-route-name="@Model.romajiTitle">Recenze</a>
+        </h3>
+        &nbsp;
+        @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Reviewer")))
+        {
+            <h3 class="rew-head add">
+                <a asp-controller="Reviews" asp-action="Create" asp-route-id="@Model.animeId" asp-route-table="animes" asp-route-nameId="anime_id">Přidat recenzi</a>
+            </h3>
+        }
+        <div class="category-wrap rew">
+            @if (Model.reviews.Count > 0)
+            {
+                for (int i = 0; i < Model.reviews.Count; i++)
+                {
+                    <div class="rew-box">
+                        <a asp-controller="Reviews" asp-action="Details" asp-route-id="@Model.reviews[i].reviewId">
+                            <div class="rew-box-title">@Html.DisplayFor(model => model.reviews[i].title)</div>
+                            <br>
+                            <div class="rew-box-text">
+                                @Html.DisplayFor(model => model.reviews[i].content)
+                            </div>
+                            <div class="rew-box-name">
+                                <a asp-controller="User" asp-action="Index" asp-route-userName="@Model.reviews[i].user.username">
+                                    @Html.DisplayFor(model => model.reviews[i].user.username)
+                                </a>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

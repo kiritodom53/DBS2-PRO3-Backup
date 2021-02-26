@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/body.css"/>
+    <link rel="stylesheet" href="~/css/header.css"/>
+    <link rel="stylesheet" href="~/css/livesearchOverlay.css"/>
+    <link rel="stylesheet" href="~/css/edit.css"/>
+    @* <link rel="stylesheet" href="~/css/anime.css"/> *@
+    @* <link rel="stylesheet" href="~/css/site.css"/> *@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/24043e2d5b.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    @* <script type="text/javascript" src="~/js/boot.js"></script> *@
+    @* <script type="text/javascript" src="~/js/anime.js"></script> *@
+    <script src="~/js/livesearchOverlay.js"></script>
+    <script src="~/js/edit.js"></script>
+    <script
+          src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"
+          integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk="
+          crossorigin="anonymous"
+        ></script>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css"
+          integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg="
+          crossorigin="anonymous"
+        />
+    @* <script src="~/js/anime.js"></script> *@
+</head>
+<body>
+<partial name="_Menu"/>
+<div class="edit-content">
+    <div class="edit-container">
+        <nav>
+            <a asp-controller="Studios" asp-action="Create">Přidat Studio</a>
+            <a asp-controller="Animes" asp-action="Create">Přidat Anime</a>
+            <a asp-controller="Manga" asp-action="Create">Přidat Mangu</a>
+            <a asp-controller="Characters" asp-action="Create">Přidat Postavu</a>
+            <a asp-controller="VoiceActors" asp-action="Create">Přidat Dabéra</a>
+            <a asp-controller="Staffs" asp-action="Create">Přidat Staff</a>
+            <a asp-controller="Administration" asp-action="Index">Administrace</a>
+            <a asp-controller="Administration" asp-action="ReviewRightsRequest">Žádosti o recenzování</a>
+            @* <a asp-controller="Administration" asp-action="ListRoles">List Roles</a> *@
+        </nav>
+        @RenderBody()
+    </div>
+</div>
+
+@RenderSection("Scripts", required: false)
+<partial name="_Footer"/>
+</body>
+</html>

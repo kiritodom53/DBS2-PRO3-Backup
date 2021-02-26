@@ -1,0 +1,54 @@
+﻿@model MoYobuDb.Models.Tables.VoiceActor
+
+@{
+    ViewData["Title"] = "Vytvořit dabéra";
+    Layout = "_Layout_FORMS";
+}
+
+<form enctype="multipart/form-data" asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <div class="file">
+            <div>
+                <label for="image_uploads">Zvolte soubor</label>
+                <input class="file-input"
+                       type="file"
+                       id="image_uploads"
+                       name="image_uploads"
+                       accept=".jpg, .jpeg, .png"
+                       asp-for="voiceActorImg">
+                <span asp-validation-for="voiceActorImg"></span>
+            </div>
+            <div class="preview">
+                <p>Žádný soubor nebyl zvolen</p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="name" class="control-label"></label>
+        <input asp-for="name" class="form-control"/>
+        <span asp-validation-for="name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="nameNative" class="control-label"></label>
+        <input asp-for="nameNative" class="form-control"/>
+        <span asp-validation-for="nameNative" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="surname" class="control-label"></label>
+        <input asp-for="surname" class="form-control"/>
+        <span asp-validation-for="surname" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="surnameNative" class="control-label"></label>
+        <input asp-for="surnameNative" class="form-control"/>
+        <span asp-validation-for="surnameNative" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-default"/>
+    </div>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

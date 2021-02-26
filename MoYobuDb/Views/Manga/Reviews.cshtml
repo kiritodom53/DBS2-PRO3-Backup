@@ -1,0 +1,41 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model MoYobuDb.Models.Tables.Manga
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    ViewData["Title"] = "Recenze";
+    Layout = "_Layout_MANGA";
+}
+
+<div class="overview">
+    <div class="category">
+        <h3 class="rew-head">
+            <a asp-action="Reviews" asp-route-id="@Model.mangaId" asp-route-name="@Model.romajiTitle">Recenze</a>
+        </h3>
+        &nbsp;
+        @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Reviewer")))
+        {
+            <h3 class="rew-head add">
+                <a asp-controller="Reviews" asp-action="Create" asp-route-id="@Model.mangaId" asp-route-table="mangas" asp-route-nameId="manga_id">Přidat recenzi</a>
+            </h3>
+        }
+        <div class="category-wrap rew">
+            @if (Model.reviews.Count > 0)
+            {
+                for (int i = 0; i < Model.reviews.Count; i++)
+                {
+                    <div class="rew-box">
+                        <div class="rew-box-title">@Html.DisplayFor(model => model.reviews[i].title)</div>
+                        <br>
+                        <div class="rew-box-text">
+                            @Html.DisplayFor(model => model.reviews[i].content)
+                        </div>
+                        <div class="rew-box-name">
+                            @Html.DisplayFor(model => model.reviews[i].userId)
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+</div>

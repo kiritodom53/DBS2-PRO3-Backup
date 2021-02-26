@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MoYobuDb.Models.Tables.AnimeCharacter>
+@{
+    ViewData["Title"] = "Index ACH";
+}
+<h2>Index</h2>
+
+<p>
+    @*<a asp-action="Create">Create New</a>*@
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.animeCharactersId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.animeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.characterId)
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.animeCharactersId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.animeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.characterId)
+            </td>
+            <td>
+                @*<a asp-action="Edit" asp-route-id="@item.studioId">Edit</a> |*@
+                <a asp-action="Details" asp-route-id="@item.animeCharactersId">Details</a>@* |
+                    <a asp-action="Delete" asp-route-id="@item.studioId">Delete</a>*@
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

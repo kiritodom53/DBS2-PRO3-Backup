@@ -1,0 +1,163 @@
+﻿@using Castle.Core.Internal
+@using Microsoft.AspNetCore.Identity
+@model MoYobuDb.Models.Tables.Manga
+@inject SignInManager<ApplicationUser> SignInManager
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/anime.css"/>
+    <link rel="stylesheet" href="~/css/body.css"/>
+    <link rel="stylesheet" href="~/css/header.css"/>
+    <link rel="stylesheet" href="~/css/livesearchOverlay.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/24043e2d5b.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="~/js/anime.js"></script>
+    <script src="~/js/livesearchOverlay.js"></script>
+</head>
+<body>
+<partial name="_Menu"/>
+<div class="anime-content">
+    @* <img class="cover" src="@Html.DisplayFor(model => model.img)" alt="cover"/> *@
+    @{
+        if (!Model.img.IsNullOrEmpty())
+        {
+            if (Model.img.Split('/')[0] == "uploads")
+            {
+                <img class="cover" src="~/@Html.DisplayFor(model => model.img)" alt="cover"/>
+            }
+            else
+            {
+                <img class="cover" src="@Html.DisplayFor(model => model.img)" alt="cover"/>
+            }
+        }
+        else
+        {
+            <img class="cover" src="~/images/noimg.png" alt="cover"/>
+        }
+    }
+    <div class="description-box">
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <h1>
+                <a asp-controller="Manga" asp-action="Edit" asp-route-id="@Model.mangaId" asp-route-name="@Model.romajiTitle">@Html.DisplayFor(model => model.romajiTitle)</a>
+            </h1>
+        }
+        else
+        {
+            <h1>@Html.DisplayFor(model => model.romajiTitle)</h1>
+        }
+        <div class="description">
+            <div class="desc-text">
+                @Html.DisplayFor(model => model.descriptions)
+            </div>
+            <div class="open">
+                <img src="~/images/arrow-down.svg" class="arrowimg">
+            </div>
+        </div>
+    </div>
+    <div class="sidebar">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div class="first">
+                <form class="form" method="POST" asp-controller="Manga" asp-action="AddToList" asp-route-id="@Model.mangaId" asp-route-name="@Model.romajiTitle">
+                    <select name="listId" asp-items="ViewBag.mangaLists"></select>
+                    @* <input type="submit"/> *@
+                </form>
+                <div class="like">
+                    <form method="POST" asp-controller="Manga" asp-action="AddToFavourite" asp-route-id="@Model.mangaId" asp-route-name="@Model.romajiTitle" asp-route-akce="@ViewData["fav"]">
+                        <input type="hidden" asp-for="@Model.mangaId">
+                        <input class="img-button" type="image" src="~/@ViewData["fav"]" alt="Submit Form"/>
+                    </form>
+                    @* <img src="~/images/heart0.svg"> *@
+                </div>
+            </div>
+        }
+        <div class="quick-info">
+            <div class="bulet">
+                <span>
+                    <b>
+                        <h3>Alternativní názvy</h3>
+                    </b>
+                </span>
+            </div>
+            <div class="bulet">
+                <span>
+                    <b>Romaji</b>
+                </span>
+                <span>@Html.DisplayFor(model => model.romajiTitle)</span>
+            </div>
+            <div class="bulet">
+                <span>
+                    <b>Anglicky</b>
+                </span>
+                <span>@Html.DisplayFor(model => model.englishTitle)</span>
+            </div>
+            <div class="bulet">
+                <span>
+                    <b>Originál</b>
+                </span>
+                <span>@Html.DisplayFor(model => model.japaneseTitle)</span>
+            </div>
+            <div class="bulet">
+                <span>
+                    <b>
+                        <h3>Informace</h3>
+                    </b>
+                </span>
+            </div>
+            <div class="bulet">
+                <span>
+                    <b>Formát</b>
+                </span>
+                <span>@Html.DisplayFor(model => model.format)</span>
+            </div>
+            <div class="bulet">
+                <span>
+                    <b>Kapitoly</b>
+                </span>
+                <span>@Html.DisplayFor(model => model.chapters)</span>
+            </div>
+            <div class="bulet">
+                <span>
+                    <b>Status</b>
+                </span>
+                <span>@Html.DisplayFor(model => model.status)</span>
+            </div>
+            <div class="bulet">
+                <span>
+                    <b>Datum začátku</b>
+                </span>
+                <span>@Html.DisplayFor(model => model.startDate)</span>
+            </div>
+            <div class="bulet">
+                <span>
+                    <b>Datum konce</b>
+                </span>
+                <span>@Html.DisplayFor(model => model.endDate)</span>
+            </div>
+            <div class="bulet">
+                <span>
+                    <b>Skóre</b>
+                </span>
+                <span>@Html.DisplayFor(model => model.score)</span>
+            </div>
+            <div class="bulet">
+                <span>
+                    <b>Zdroj</b>
+                </span>
+                <span>@Html.DisplayFor(model => model.source)</span>
+            </div>
+            <div class="bulet">
+                <span>
+                    <b>Žánry</b>
+                </span>
+                <span>TV</span>
+            </div>
+        </div>
+    </div>
+    @RenderBody()
+</div>
+<partial name="_Footer"/>
+</body>
+</html>

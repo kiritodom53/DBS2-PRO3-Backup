@@ -1,0 +1,114 @@
+﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+// for details on configuring this project to bundle and minify static web assets.
+
+// Write your JavaScript code.
+$(document).ready(function () {
+    $('.open').click(function () {
+        if ($(".desc-text").css("height") == "90px") {
+            $('.desc-text').css('height', 'auto');
+            var autoHeight = $('.desc-text').height();
+            $('.desc-text').css('height', '90px');
+            $(".desc-text").animate({height: autoHeight}, 250);
+            $('.desc-text').css('pointerEvents', 'none');
+            $('.arrowimg').toggleClass('flip');
+        } else {
+            $(".desc-text").animate({height: "90px"}, 250);
+            $('.desc-text').css('pointerEvents', 'initial');
+            $('.arrowimg').toggleClass('flip');
+        }
+        return false;
+    });
+
+    $('.quick-info-btn').click(function () {
+        if ($(".quick-info").css("height") == "0px") {
+            $('.quick-info').css('height', 'auto');
+            var autoHeight = $('.quick-info').height();
+            $('.quick-info').css('height', '0px');
+            $(".quick-info").animate({height: autoHeight}, 400);
+            $('.quick-info').css('pointerEvents', 'none');
+            $('.arrowimg2').toggleClass('flip');
+        } else {
+            $(".quick-info").animate({height: "0px"}, 400);
+            $('.quick-info').css('pointerEvents', 'initial');
+            $('.arrowimg2').toggleClass('flip');
+        }
+        return false;
+    });
+
+    function isOverflown(element) {
+        return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
+    }
+
+    var els = document.getElementsByClassName('desc-text');
+
+    $(window).resize(function () {
+        if (isOverflown(els[0])) {
+            $('.open a').css('display', 'block');
+        } else {
+            $('.open a').css('display', 'none');
+        }
+    });
+
+    if (isOverflown(els[0])) {
+        $('.open').css('display', 'block');
+        $('div.description').css('padding', '2em 2em 0.5em 2em');
+    }
+
+
+    $('#list').click(function () {
+        $('#overlay').fadeIn(300);
+    });
+    $('#close').click(function () {
+        $('#overlay').fadeOut(300);
+    });
+
+
+    $('select').each(function () {
+        var $this = $(this), numberOfOptions = $(this).children('option').length;
+
+        $this.addClass('select-hidden');
+        $this.wrap('<div class="select"></div>');
+        $this.after('<div class="select-styled"></div>');
+
+        var $styledSelect = $this.next('div.select-styled');
+        $styledSelect.text($this.children('option').eq(0).text());
+
+        var $list = $('<ul />', {
+            'class': 'select-options'
+        }).insertAfter($styledSelect);
+
+        for (var i = 0; i < numberOfOptions; i++) {
+            $('<li />', {
+                text: $this.children('option').eq(i).text(),
+                rel: $this.children('option').eq(i).val(),
+                'class': 'submit-btn'
+            }).appendTo($list);
+        }
+
+        var $listItems = $list.children('li');
+
+        $styledSelect.click(function (e) {
+            e.stopPropagation();
+            $('div.select-styled.active').not(this).each(function () {
+                $(this).removeClass('active').next('ul.select-options').hide();
+            });
+            $(this).toggleClass('active').next('ul.select-options').toggle();
+        });
+
+        $listItems.click(function (e) {
+            e.stopPropagation();
+            $styledSelect.text($(this).text()).removeClass('active');
+            $this.val($(this).attr('rel'));
+            $list.hide();
+        });
+
+        $(document).click(function () {
+            $styledSelect.removeClass('active');
+            $list.hide();
+        });
+    });
+    
+    $(".submit-btn").click(function () {
+        $(".form").submit();
+    });
+});

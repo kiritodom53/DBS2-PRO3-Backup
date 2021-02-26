@@ -1,0 +1,32 @@
+﻿.background-verified {
+    background-color: #020202;
+    padding: 2rem;
+    margin: auto;
+    vertical-align: middle;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.background-verified .container-verified {
+    margin: auto;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+}
+
+.background-verified .container-verified .verified {
+    background-color: #191919;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    margin: auto;
+    padding: 1rem;
+    border-radius: 3px;
+}
+/*# sourceMappingURL=style.css.map */

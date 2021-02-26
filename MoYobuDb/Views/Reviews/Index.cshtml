@@ -1,0 +1,66 @@
+﻿@model IEnumerable<MoYobuDb.Models.Tables.Review>
+
+@{
+    ViewData["Title"] = "Recenze";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.score)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.myDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.reviewsThread)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.myDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.user.username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.reviewsThread.reviewsThreadId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.reviewId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.reviewId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.reviewId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,161 @@
+﻿@model MoYobuDb.Models.Tables.User
+
+@{
+    ViewData["Title"] = "title";
+    Layout = "_Layout_USER";
+}
+
+<div class="profil-left">
+    <div class="profil-aboutMe">
+        @Html.DisplayFor(model => model.desciption)
+    </div>
+
+@*     <div class="fav-box"> *@
+@*         <h2>Oblíbená anime</h2> *@
+@*         <div class="favourite"> *@
+@*             @if (Model.favouritesAnime.Count > 0) *@
+@*             { *@
+@*                 int max = 3; *@
+@*                 if (Model.favouritesAnime.Count < 3) *@
+@*                 { *@
+@*                     max = Model.favouritesAnime.Count; *@
+@*                 } *@
+@*                 @for (int i = 0; i < max; i++) *@
+@*                 { *@
+@*                     $1$TODO: Ošetřit, že pokud nebude mít anime obrázek ukáže no image obrázek#1# *@
+@*                     <div class="img-box"> *@
+@*                         <p class="name">@Html.DisplayFor(model => model.favouritesAnime[i].romajiTitle)</p> *@
+@*                         @if (Model.favouritesAnime[i].coverImage.Split("/")[0] == "uploads") *@
+@*                         { *@
+@*                             <img src="~/@Model.favouritesAnime[i].coverImage" alt="Anime cover image"/> *@
+@*                         } *@
+@*                         else *@
+@*                         { *@
+@*                             <img src="@Model.favouritesAnime[i].coverImage" alt="Anime cover image"/> *@
+@*                         } *@
+@*                     </div> *@
+@*                 } *@
+@*             } *@
+@* *@
+@*         </div> *@
+@*     </div> *@
+@*     <div class="fav-box"> *@
+@*         <h2>Oblíbená manga</h2> *@
+@*         <div class="favourite"> *@
+@*             @if (Model.favouritesManga.Count > 0) *@
+@*             { *@
+@*                 int max = 3; *@
+@*                 if (Model.favouritesManga.Count < 3) *@
+@*                 { *@
+@*                     max = Model.favouritesManga.Count; *@
+@*                 } *@
+@*                 @for (int i = 0; i < max; i++) *@
+@*                 { *@
+@*                                     $1$TODO: Ošetřit, že pokud nebude mít anime obrázek ukáže no image obrázek#1# *@
+@*                     <div class="img-box"> *@
+@*                         <p class="name">@Html.DisplayFor(model => model.favouritesManga[i].romajiTitle)</p> *@
+@*                         @if (Model.favouritesManga[i].img.Split("/")[0] == "uploads") *@
+@*                         { *@
+@*                             <img src="~/@Model.favouritesManga[i].img" alt="Manga cover image"/> *@
+@*                         } *@
+@*                         else *@
+@*                         { *@
+@*                             <img src="@Model.favouritesManga[i].img" alt="Manga cover image"/> *@
+@*                         } *@
+@*                     </div> *@
+@*                 } *@
+@*             } *@
+@*         </div> *@
+@*     </div> *@
+</div>
+<div class="profil-right">
+    <div class="history-box">
+        <h2>Oblíbená anime</h2>
+                <div class="favourite">
+                    @if (Model.favouritesAnime.Count > 0)
+                    {
+                        int max = 3;
+                        if (Model.favouritesAnime.Count > 3)
+                        {
+                            if (Model.favouritesAnime.Count > 18)
+                            {
+                                max = 18;
+                            }
+                            else
+                            {
+                                max = Model.favouritesAnime.Count;
+                            }
+                        }
+                        else
+                        {
+                            max = Model.favouritesAnime.Count;
+                        }
+                        @for (int i = 0; i < max; i++)
+                        {
+                            @*TODO: Ošetřit, že pokud nebude mít anime obrázek ukáže no image obrázek*@
+                            <div class="img-box">
+                                <p class="name">@Html.DisplayFor(model => model.favouritesAnime[i].romajiTitle)</p>
+                                @if (Model.favouritesAnime[i].coverImage.Split("/")[0] == "uploads")
+                                {
+                                    <a asp-controller="Animes" asp-action="Details" asp-route-id="@Model.favouritesAnime[i].animeId" asp-route-name="@Model.favouritesAnime[i].romajiTitle">
+                                        <img src="~/@Model.favouritesAnime[i].coverImage" alt="Anime cover image"/>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Animes" asp-action="Details" asp-route-id="@Model.favouritesAnime[i].animeId" asp-route-name="@Model.favouritesAnime[i].romajiTitle">
+                                        <img src="@Model.favouritesAnime[i].coverImage" alt="Anime cover image"/>
+                                    </a>
+                                }
+                            </div>
+                        }
+                    }
+        
+                </div>
+    </div>
+
+    <div class="history-box">
+        <h2>Oblíbená manga</h2>
+        <div class="favourite">
+            @if (Model.favouritesManga.Count > 0)
+            {
+                int max = 3;
+                if (Model.favouritesManga.Count > 3)
+                {
+                    if (Model.favouritesManga.Count > 18)
+                    {
+                        max = 18;
+                    }
+                    else
+                    {
+                        max = Model.favouritesManga.Count;
+
+                    }
+                }
+                else
+                {
+                    max = Model.favouritesManga.Count;
+                }
+                @for (int i = 0; i < max; i++)
+                {
+                                            @*TODO: Ošetřit, že pokud nebude mít anime obrázek ukáže no image obrázek*@
+                    <div class="img-box">
+                        <p class="name">@Html.DisplayFor(model => model.favouritesManga[i].romajiTitle)</p>
+                        @if (Model.favouritesManga[i].img.Split("/")[0] == "uploads")
+                        {
+                            <a asp-controller="Manga" asp-action="Details" asp-route-id="@Model.favouritesManga[i].mangaId" asp-route-name="@Model.favouritesManga[i].romajiTitle">
+                                <img src="~/@Model.favouritesManga[i].img" alt="Manga cover image"/>
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Manga" asp-action="Details" asp-route-id="@Model.favouritesManga[i].mangaId" asp-route-name="@Model.favouritesManga[i].romajiTitle">
+                                <img src="@Model.favouritesManga[i].img" alt="Manga cover image"/>
+                            </a>
+                        }
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+﻿@model MoYobuDb.Models.Tables.Review
+
+@{
+    ViewData["Title"] = "Vymazat recenzi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Review</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.content)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.content)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.score)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.score)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.myDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.myDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.user)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.user.username)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.reviewsThread)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.reviewsThread.reviewsThreadId)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="reviewId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

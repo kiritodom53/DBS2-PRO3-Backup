@@ -1,0 +1,31 @@
+﻿@model MoYobuDb.Models.Tables.Manga
+
+@{
+    ViewData["Title"] = "Postavy";
+    Layout = "_Layout_MANGA";
+}
+
+<div class="overview">
+    <div class="category">
+        <h3>
+            <a asp-action="Characters" asp-route-id="@Model.mangaId" asp-route-name="@Model.romajiTitle">Postavy</a>
+        </h3>
+        <div class="category-wrap voice">
+
+            @if (Model.characters.Count > 0)
+            {
+                for (int i = 0; i < Model.characters.Count; i++)
+                {
+                    <a asp-controller="Characters" asp-action="Details" asp-route-id="@Model.characters[i].characterId">
+
+                        <div class="img-box">
+                            <p class="name">@Html.DisplayFor(model => model.characters[i].name)</p>
+                            <p class="role">@Html.DisplayFor(model => model.characters[i].surname)</p>
+                            <img src="@Html.DisplayFor(model => model.characters[i].mediumImgUrl)" alt="Charakter"/>
+                        </div>
+                    </a>
+                }
+            }
+        </div>
+    </div>
+</div>

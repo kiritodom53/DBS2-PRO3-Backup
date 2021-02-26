@@ -1,0 +1,75 @@
+﻿@using Castle.Core.Internal
+@model MoYobuDb.Models.Tables.Anime
+
+@{
+    ViewData["Title"] = "Postavy";
+    Layout = "_Layout_ANIME";
+}
+
+
+@* @foreach (var item in Model.characters) *@
+@* { *@
+@*     <tr> *@
+@*         <td> *@
+@*             @Html.DisplayFor(modelItem => item.name) *@
+@*         </td> *@
+@*     </tr> *@
+@* } *@
+
+
+<div class="overview">
+    <div class="category">
+        <h3>
+            <a asp-action="Characters" asp-route-id="@Model.animeId" asp-route-name="@Model.romajiTitle">Postavy</a>
+        </h3>
+        <div class="category-wrap char">
+
+            @if (Model.characters.Count > 0)
+            {
+                for (int i = 0; i < Model.characters.Count; i++)
+                {
+                    <div class="img-wrap">
+                        <a asp-controller="Characters" asp-action="Details" asp-route-id="@Model.characters[i].characterId">
+                            <div class="img-box">
+                                <p class="name">@Html.DisplayFor(model => model.characters[i].name)</p>
+                                <p class="role">@Html.DisplayFor(model => model.characters[i].surname)</p>
+                                @if (Model.characters[i].mediumImgUrl.IsNullOrEmpty())
+                                {
+                                    <img src="~/images/noimg.png" alt="Voice actor"/>
+                                }
+                                else if (Model.characters[i].mediumImgUrl.Split("/")[0] == "uploads")
+                                {
+                                    <img src="~/@Html.DisplayFor(model => model.characters[i].mediumImgUrl)" alt="Voice actor"/>
+                                }
+                                else
+                                {
+                                    <img src="@Html.DisplayFor(model => model.characters[i].mediumImgUrl)" alt="Voice actor"/>
+                                }
+                            </div>
+                        </a>
+                        <div class="img-box">
+                            <p class="name">@Html.DisplayFor(model => model.characters[i].voiceActor.name)</p>
+                            <p class="role">@Html.DisplayFor(model => model.characters[i].voiceActor.surname)</p>
+                            @if (Model.characters[i].voiceActor != null)
+                            {
+                                @if (Model.characters[i].voiceActor.img.IsNullOrEmpty())
+                                {
+                                    <img src="~/images/noimg.png" alt="Voice actor"/>
+                                }
+                                else if (Model.characters[i].voiceActor.img.Split("/")[0] == "uploads")
+                                {
+                                    <img src="~/@Html.DisplayFor(model => model.characters[i].voiceActor.img)" alt="Voice actor"/>
+                                }
+                                else
+                                {
+                                    <img src="@Html.DisplayFor(model => model.characters[i].voiceActor.img)" alt="Voice actor"/>
+                                }
+                            }
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+</div>

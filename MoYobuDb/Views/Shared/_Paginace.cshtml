@@ -1,0 +1,139 @@
+﻿@{
+    int tempPage = Convert.ToInt32(Context.Request.Query["page"]);
+    string format = Context.Request.Query["format"];
+    string year = Context.Request.Query["year"];
+    string studio = Context.Request.Query["studio"];
+    string status = Context.Request.Query["status"];
+    string score = Context.Request.Query["score"];
+    //string action = ViewContext.Controller.ValueProvider["action"].RawValue;
+    string t = (string) Html.ViewContext.RouteData.Values["action"];
+}
+
+<nav data-pagination class="paginace">
+    @{
+        int page = tempPage;
+
+        int start = page - 3;
+        int previous = page - 1;
+        int next;
+        if (page == 0)
+        {
+            next = 2;
+        }
+        else
+        {
+            next = page + 1;
+        }
+        int end = page + 4;
+        if (page != 0 && page != 1)
+        {
+                @* <i class=ion-chevron-left></i> *@
+            <a asp-action="@Html.ViewContext.RouteData.Values["action"]" asp-route-page="@previous" asp-route-format="@format" asp-route-year="@year" asp-route-studio="@studio" asp-route-status="@status" asp-route-score="@score">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+        }
+        if (page == 0)
+        {
+            page = 1;
+        }
+        if (page == 3)
+        {
+            start = page - 2;
+            end = page + 5;
+        }
+        else if (page == 2)
+        {
+            start = page - 1;
+            end = page + 6;
+        }
+        else if (page == 1)
+        {
+            start = page;
+            end = page + 7;
+        }
+
+        <ul>
+            @for (int i = start; i < end; i++)
+            {
+                string className = "";
+                if (i == page)
+                {
+                    className = "current";
+                }
+                else if (page == 0 && i == 1)
+                {
+                    className = "current";
+                }
+                <li class="@className">
+                    <a asp-action="@Html.ViewContext.RouteData.Values["action"]" class="@className" asp-route-page="@i" asp-route-format="@format" asp-route-year="@year" asp-route-studio="@studio" asp-route-status="@status" asp-route-score="@score">@i</a>
+                </li>
+            }
+        </ul>
+
+        <a asp-action="@Html.ViewContext.RouteData.Values["action"]" asp-route-page="@next" asp-route-format="@format" asp-route-year="@year" asp-route-studio="@studio" asp-route-status="@status" asp-route-score="@score">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    }
+
+
+</nav>
+
+@* <table class="tg" align="center"> *@
+@*     <tr> *@
+@*         @{ *@
+@*             int page = tempPage; *@
+@*             int start = page - 3; *@
+@*             int previous = page - 1; *@
+@*             int next = page + 1; *@
+@*             int end = page + 4; *@
+@*             if (page != 0 && page != 1) *@
+@*             { *@
+@*                 <th class="tg-o457"> *@
+@*                     <a asp-action="@Html.ViewContext.RouteData.Values["action"]" asp-route-page=@previous> *@
+@*                         <i class="fas fa-arrow-left"></i> *@
+@*                     </a> *@
+@*                 </th> *@
+@*             } *@
+@*             if (page == 0) *@
+@*             { *@
+@*                 page = 1; *@
+@*             } *@
+@*             if (page == 3) *@
+@*             { *@
+@*                 start = page - 2; *@
+@*                 end = page + 5; *@
+@*             } *@
+@*             else if (page == 2) *@
+@*             { *@
+@*                 start = page - 1; *@
+@*                 end = page + 6; *@
+@*             } *@
+@*             else if (page == 1) *@
+@*             { *@
+@*                 start = page; *@
+@*                 end = page + 7; *@
+@*             } *@
+
+@*             for (int i = start; i < end; i++) *@
+@*             { *@
+@*                 string className = "tg-50vv"; *@
+@*                 if (i == page) *@
+@*                 { *@
+@*                     className = "tg-ci7z"; *@
+@*                 } *@
+@*                 else if (page == 0 && i == 1) *@
+@*                 { *@
+@*                     className = "tg-ci7z"; *@
+@*                 } *@
+@*                 <th class="@className"> *@
+@*                     <a class="paginace-url" asp-action="@Html.ViewContext.RouteData.Values["action"]" asp-route-page="@i">@i</a> *@
+@*                 </th> *@
+@*             } *@
+@*             <th class="tg-50vv"> *@
+@*                 <a asp-action="@Html.ViewContext.RouteData.Values["action"]" asp-route-page="@next"> *@
+@*                     <i class="fas fa-arrow-right"></i> *@
+@*                 </a> *@
+@*             </th> *@
+@*         } *@
+@*     </tr> *@
+@* </table> *@

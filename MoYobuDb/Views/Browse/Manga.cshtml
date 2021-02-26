@@ -1,0 +1,79 @@
+﻿@model IEnumerable<MoYobuDb.Models.Tables.Manga>
+@{
+    ViewData["Title"] = "Prohlížení mangy";
+    Layout = "_Layout_BROWSE_MANGA";
+    var tempPage = Convert.ToInt32(Context.Request.Query["page"]);
+}
+
+@foreach (var item in Model)
+{
+    <a asp-controller="Manga" asp-action="Details" asp-route-id="@item.mangaId" asp-route-name="@item.romajiTitle">
+        <div class="img-box">
+                @if (item.img == null)
+                {
+                    <img src="~/images/noimg.png" alt="Voice actor"/>
+                }
+                else if (item.img.Split("/")[0] == "uploads")
+                {
+                    <img src="~/@item.img" alt="Voice actor"/>
+                }
+                else
+                {
+                    <img src="@item.img" alt="Voice actor"/>
+                }
+        @*         @if (item.coverImage != null) *@
+        @*         { *@
+        @*             <img src="~/@item.coverImage" alt="coverImg"/> *@
+        @*         } *@
+        @*         else *@
+        @*         { *@
+        @*             <img src="https://s4.anilist.co/file/anilistcdn/character/large/default.jpg" alt="coverImg"/> *@
+        @*         } *@
+        
+                <p>@Html.DisplayFor(model => item.romajiTitle)</p>
+            </div>
+    </a>
+}
+<partial name="_Paginace"/>
+@* <h2>Index</h2> *@
+@* *@
+@* <p> *@
+@*     $1$<a asp-action="Create">Create New</a>#1# *@
+@* </p> *@
+@* <table class="table"> *@
+@*     <thead> *@
+@*     <tr> *@
+@*         <th> *@
+@*             @Html.DisplayNameFor(model => model.englishTitle) *@
+@*         </th> *@
+@*         <th> *@
+@*             @Html.DisplayNameFor(model => model.romajiTitle) *@
+@*         </th> *@
+@* *@
+@*     </tr> *@
+@*     </thead> *@
+@*     <tbody> *@
+@*     @foreach (var item in Model) *@
+@*     { *@
+@*         <tr> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.englishTitle) *@
+@*             </td> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.romajiTitle) *@
+@*             </td> *@
+@* *@
+@*             <td> *@
+@*                 $1$<a asp-action="Edit" asp-route-id="@item.studioId">Edit</a> |#1# *@
+@*                 <a asp-controller="Manga" asp-action="Details" asp-route-id="@item.mangaId" asp-route-name="@item.romajiTitle.Replace(' ', '-')">Details</a>@* | *@
+@*                     <a asp-action="Delete" asp-route-id="@item.studioId">Delete</a>*@
+@*             </td> *@
+@*         </tr> *@
+@*     } *@
+@*     </tbody> *@
+@* </table> *@
+@* <br> *@
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+}

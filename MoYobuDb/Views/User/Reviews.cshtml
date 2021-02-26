@@ -1,0 +1,28 @@
+﻿@model MoYobuDb.Models.Tables.User
+
+@{
+    ViewData["Title"] = "title";
+    Layout = "_Layout_USER";
+}
+
+<h2>Recenze</h2>
+@* @foreach (var item in Model) *@
+@* { *@
+@*     //int rid = @Html.DisplayFor(itemModel => item.reviewId); *@
+@*     <p> *@
+@*         @Html.DisplayFor(itemModel => item.title)<br/> *@
+@*         @Model[0].reviewId *@
+@*         <a asp-controller="Reviews" asp-action="Delete" asp-route-id="@Html.DisplayFor(itemModel => item.reviewId)">Vymazat</a> *@
+@*      </p> *@
+@* } *@
+
+@for (int i = 0; i < Model.reviews.Count; i++)
+{
+    <p>
+        <a asp-controller="Reviews" asp-action="Details" asp-route-id="@Model.reviews[i].reviewId">
+            @Html.DisplayFor(itemModel => Model.reviews[i].title)<br/>
+        </a>
+        @* <a asp-controller="Reviews" asp-action="Delete" asp-route-id="@Model.reviews[i].reviewId">Vymazat</a> |  *@
+        @* <a asp-controller="Reviews" asp-action="Edit" asp-route-id="@Model.reviews[i].reviewId">Editovat</a> *@
+    </p>
+}

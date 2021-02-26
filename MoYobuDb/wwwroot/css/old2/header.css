@@ -1,0 +1,120 @@
+.galery-width{
+    width: 625px
+}
+header {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 3;
+    grid-column: 1/4;
+    -ms-grid-row: 1;
+    grid-row: 1;
+
+/padding: 1em 0 1em 0;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    display: -ms-grid;
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    height: 4em;
+}
+
+
+header nav {
+    display: -ms-grid;
+    display: grid;
+    grid-template-columns: 5fr 9fr ;                                                                            );
+    -webkit-column-gap: 1em;
+    column-gap: 1em;
+    grid-column: 2;
+}
+header nav .butons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(117px,1fr));
+    column-gap: 1em;
+}
+
+header nav .buton, #logo{
+    height: max-content;
+    width: max-content;
+    margin: auto;
+}
+
+header nav #logo img {
+    height: 4em;
+    margin: auto;
+}
+
+
+header nav form {
+    margin: auto;
+    height: 1em;
+    display: -ms-grid;
+    display: flex;
+    -ms-grid-columns: 2fr 1fr 3fr;
+    grid-template-columns: 2fr 1fr 3fr;
+    grid-column-gap: 0.3em;
+    width: 90%;
+}
+
+header nav form input {
+    background-color: #212121;
+    border-radius: 3px;
+    border: none;
+    text-align: center;
+    color: #9d9d9d;
+    height: 2em;
+    width: 80%;
+    margin: auto 0 auto 0;
+    padding: 0;
+}
+
+header nav form button {
+    background-color: #4d4d4d;
+    border: none;
+    border-radius: 3px;
+    height: 2em;
+    width: 2em;
+    margin: auto 0 auto 0;
+    padding: 0;
+}
+
+header nav form button img {
+    margin: auto;
+    width: 1em;
+}
+
+@media only screen and (max-width: 1600px) {
+    header nav {
+        grid-column: 1;
+    }
+
+    header {
+        grid-template-columns: 1fr;
+        height: initial;
+    }
+    header nav .butons {
+
+    }
+}
+
+@media (max-width: 1000px) {
+    header nav {
+        grid-template-columns: 1fr;
+    }
+    header nav form {
+    }
+    header nav #logo {
+
+    }
+}
+
+@media (max-width: 800px) {
+    body{
+        display: initial;
+    }
+}
+
+@media (max-width: 600px) {
+    .galery-width{
+        width: 310px;
+    }
+}

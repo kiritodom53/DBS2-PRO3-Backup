@@ -1,0 +1,70 @@
+﻿@model MoYobuDb.Models.Tables.User
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script
+        src="https://kit.fontawesome.com/24043e2d5b.js"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/body.css"/>
+    <link rel="stylesheet" href="~/css/header.css"/>
+    <link rel="stylesheet" href="~/css/livesearchOverlay.css"/>
+    <link rel="stylesheet" href="~/css/profil.css"/>
+    <link rel="stylesheet" href="~/css/stats.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script src="~/js/livesearchOverlay.js"></script>
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+@{
+    string user = (string) Html.ViewContext.RouteData.Values["username"];
+}
+<partial name="_Menu"/>
+<div class="profil-content">
+    <div class="profil-menu">
+        @if (Model.profileImg != null && Model.profileImg != "")
+        {
+            <a asp-controller="User" asp-action="Index" asp-route-username="@user">
+                <img src="~/@Model.profileImg"/>
+            </a>
+        }
+        else
+        {
+            <a asp-controller="User" asp-action="Index" asp-route-username="@user">
+                <img src="~/images/default-profil-ico.svg"/>
+            </a>
+        }
+        <p>
+            @Html.DisplayFor(model => model.username)
+        </p>
+        <div class="profil-menu-nav">
+            <div class="profil-menu-nav-btns">
+                <a asp-controller="User" asp-action="AnimeList" asp-route-userName="@Model.username" asp-route-listName="All">AnimeList</a>
+                <a asp-controller="User" asp-action="MangaList" asp-route-userName="@Model.username" asp-route-listName="All">MangaList</a>
+                @* <a href="#">Oblíbené</a> *@
+                <a asp-controller="User" asp-action="Stats" asp-route-userName="@Model.username">Statistiky</a>
+                <a asp-controller="User" asp-action="Reviews" asp-route-userName="@Model.username">Recenze</a>
+                @if (!Model.isReviewer && !Model.askForReviewer)
+                {
+                    <a>
+                        <form asp-controller="User" asp-action="AskForRights" asp-route-userId="@Model.userId">
+                            <input type="submit" value="Práva" class="submitLink"/>
+                        </form>
+                    </a>
+@*                     <form asp-controller="User" asp-action="AskForRights" asp-route-userId="@Model.userId"> *@
+@*                         $1$ <input type="submit" value="Požádat o možnost recenzovat" class="btn btn-default"/> #1# *@
+@*                     </form> *@
+                }
+                else if (!Model.isReviewer && Model.askForReviewer)
+                {
+                    <a>Požádáno</a>
+                }
+            </div>
+        </div>
+    </div>
+    @RenderBody()
+</div>
+<partial name="_Footer"/>
+</body>
+</html>

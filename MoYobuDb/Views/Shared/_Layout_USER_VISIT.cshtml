@@ -1,0 +1,40 @@
+﻿@model MoYobuDb.Models.Tables.User
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/body.css"/>
+    <link rel="stylesheet" href="~/css/header.css"/>
+    <link rel="stylesheet" href="~/css/livesearchOverlay.css"/>
+    <link rel="stylesheet" href="~/css/profil.css"/>
+    <link rel="stylesheet" href="~/css/stats.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+<partial name="_Menu"/>
+<div class="profil-content">
+    <div class="profil-menu">
+        @if (Model.profileImg != null && Model.profileImg != "")
+        {
+            <img src="~/@Model.profileImg"/>
+        }
+        else
+        {
+            <img src="~/images/default-profil-ico.svg"/>
+        }
+        <div class="profil-menu-nav">
+            <div class="profil-menu-nav-btns">
+                <a asp-controller="User" asp-action="AnimeList" asp-route-userName="@Model.username" asp-route-listName="All">AnimeList</a>
+                <a asp-controller="User" asp-action="MangaList" asp-route-userName="@Model.username" asp-route-listName="All">MangaList</a>
+                @* <a href="#">Oblíbené</a> *@
+                <a asp-controller="User" asp-action="Stats" asp-route-userName="@Model.username">Statistiky</a>
+                <a asp-controller="User" asp-action="Reviews" asp-route-userName="@Model.username">Recenze</a>
+            </div>
+        </div>
+    </div>
+    @RenderBody()
+</div>
+<partial name="_Footer"/>
+</body>
+</html>

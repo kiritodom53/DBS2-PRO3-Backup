@@ -1,0 +1,65 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script
+        src="https://kit.fontawesome.com/24043e2d5b.js"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/body.css"/>
+    <link rel="stylesheet" href="~/css/header.css"/>
+    <link rel="stylesheet" href="~/css/livesearchOverlay.css"/>
+    <link rel="stylesheet" href="~/css/profil.css"/>
+    <link rel="stylesheet" href="~/css/list.css"/>
+    <link rel="stylesheet" href="~/css/stats_user.css"/>
+    <script>
+        var var1 = @UserManager.GetUserName(User);
+    </script>
+    <script type="text/javascript" src="~/js/userList.js"></script>
+    <script type="text/javascript" src="~/js/List.js"></script>
+    <script src="~/js/charts-user.js"></script>
+    <script src="~/js/livesearchOverlay.js"></script>
+    @* <link rel="stylesheet" href="~/css/anime.css"/> *@
+    <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+@{
+    string user = (string) Html.ViewContext.RouteData.Values["username"];
+}
+<input type="hidden" value="@user" id="h_var1"/>
+<partial name="_Menu"/>
+<div class="profil-content">
+    <div class="profil-menu">
+
+        <a asp-controller="User" asp-action="Index" asp-route-username="@user">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <img src="~/@UserManager.GetUserAsync(User).Result.ProfileImage" alt="User profile"/>
+            }
+            else
+            {
+                <img src="~/images/default-profil-ico.svg" alt="User profile"/>
+            }
+
+        </a>
+
+        <div class="profil-menu-nav">
+            <div class="profil-menu-nav-btns">
+                <a asp-controller="User" asp-action="AnimeList" asp-route-listName="All">AnimeList</a>
+                <a asp-controller="User" asp-action="MangaList" asp-route-listName="All">MangaList</a>
+                @* <a href="#">Oblíbené</a> *@
+                <a asp-controller="User" asp-action="Stats">Statistiky</a>
+                <a asp-controller="User" asp-action="Reviews">Recenze</a>
+            </div>
+        </div>
+    </div>
+    @RenderBody()
+</div>
+<partial name="_Footer"/>
+</body>
+</html>

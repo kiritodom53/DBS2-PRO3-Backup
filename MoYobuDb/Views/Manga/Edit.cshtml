@@ -1,0 +1,101 @@
+﻿@model MoYobuDb.Models.Tables.Manga
+
+@{
+    ViewData["Title"] = "Editovat mangu";
+    Layout = "_Layout_FORMS";
+}
+
+<form enctype="multipart/form-data" asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="mangaId"/>
+    <div class="form-group">
+        <label asp-for="englishTitle" class="control-label"></label>
+        <input asp-for="englishTitle" class="form-control"/>
+        <span asp-validation-for="englishTitle" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="japaneseTitle" class="control-label"></label>
+        <input asp-for="japaneseTitle" class="form-control"/>
+        <span asp-validation-for="japaneseTitle" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="romajiTitle" class="control-label"></label>
+        <input asp-for="romajiTitle" class="form-control"/>
+        <span asp-validation-for="romajiTitle" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="descriptions" class="control-label"></label>
+        <input asp-for="descriptions" class="form-control"/>
+        <span asp-validation-for="descriptions" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <div class="file">
+            <div>
+                <label for="image_uploads">Zvolte soubor</label>
+                <input class="file-input"
+                       type="file"
+                       id="image_uploads"
+                       name="image_uploads"
+                       accept=".jpg, .jpeg, .png"
+                       asp-for="mangaImg">
+                <span asp-validation-for="mangaImg"></span>
+            </div>
+            <div class="preview">
+                <p>Žádný soubor nebyl zvolen</p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="format" class="control-label"></label>
+        <input asp-for="format" class="form-control"/>
+        <span asp-validation-for="format" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="chapters" class="control-label"></label>
+        <input asp-for="chapters" class="form-control"/>
+        <span asp-validation-for="chapters" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="anilistId" class="control-label"></label>
+        <input asp-for="anilistId" class="form-control"/>
+        <span asp-validation-for="anilistId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="malId" class="control-label"></label>
+        <input asp-for="malId" class="form-control"/>
+        <span asp-validation-for="malId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="score" class="control-label"></label>
+        <input asp-for="score" class="form-control"/>
+        <span asp-validation-for="score" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="source" class="control-label"></label>
+        <input asp-for="source" class="form-control"/>
+        <span asp-validation-for="source" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="startDate" class="control-label"></label>
+        <input asp-for="startDate" class="form-control"/>
+        <span asp-validation-for="startDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="endDate" class="control-label"></label>
+        <input asp-for="endDate" class="form-control"/>
+        <span asp-validation-for="endDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="status" class="control-label"></label>
+        <input asp-for="status" class="form-control"/>
+        <span asp-validation-for="status" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-default"/>
+    </div>
+</form>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

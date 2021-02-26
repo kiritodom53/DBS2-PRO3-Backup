@@ -1,0 +1,22 @@
+﻿@model MoYobuDb.Models.ChartsMediaView
+@{
+    ViewData["Title"] = "Statistiky";
+    Layout = "_Layout_STATS";
+}
+
+@* <script src="~/js/import.js"></script> *@
+@* <script src="~/js/charts.js"></script> *@
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<div class="stats-content">
+    <div class="chart-box">
+        <canvas id="myChart"></canvas>
+    </div>
+    <div class="chart-box">
+        <canvas id="myChart2"></canvas>
+    </div>
+    <div class="chart-box">
+        <canvas id="myChart3"></canvas>
+    </div>
+</div>

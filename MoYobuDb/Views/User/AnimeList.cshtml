@@ -1,0 +1,86 @@
+﻿@model IEnumerable<MoYobuDb.Models.Tables.MyList>
+@using Castle.Core.Internal
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Animelist";
+    Layout = "_Layout_USER2";
+}
+<div class="tg-wrap">
+    <br>
+    <select name="listName" id="listName" asp-items="ViewBag.animeLists"></select>
+
+    @foreach (var item in Model)
+    {
+        //<div>here</div>
+        //@item.user.userAspId
+        <h2>@Html.DisplayFor(model => item.name)</h2>
+
+        <table id="tg-JZbHy" class="tg">
+            <tr>
+                <th class="tg-0lax notSort"></th>
+                <th class="tg-0lax jmeno">Jméno</th>
+                <th class="tg-0lax">Moje skóre</th>
+                <th class="tg-0lax">Průměrné skóre</th>
+                <th class="tg-0lax">Počet epizod</th>
+                <th class="tg-0lax">Formát</th>
+                <th class="tg-0lax">Studio</th>
+                @if (UserManager.GetUserName(User) == ViewData["userAspId"].ToString())
+                {
+                    <th class="tg-0lax">Smazat</th>
+                }
+            </tr>
+            @try
+            {
+                @foreach (var anime in item.animeLists)
+                {
+                    <tr>
+                        <td class="tg-0lax img">
+                            @* <img src="cover.jpg" alt="coverIMG"/> *@
+                            <a asp-controller="Animes" asp-action="Details" asp-route-id="@anime.anime.animeId" asp-route-name="@anime.anime.romajiTitle">
+                                @if (!anime.anime.coverImage.IsNullOrEmpty())
+                                {
+                                    if (anime.anime.coverImage.Split('/')[0] == "uploads")
+                                    {
+                                        <img class="cover" src="~/@Html.DisplayFor(model => anime.anime.coverImage)" alt="cover"/>
+                                    }
+                                    else
+                                    {
+                                        <img class="cover" src="@Html.DisplayFor(model => anime.anime.coverImage)" alt="cover"/>
+                                    }
+                                }
+                                else
+                                {
+                                    <img class="cover" src="~/images/noimg.png" alt="cover"/>
+                                }
+
+                            </a>
+                        </td>
+                        <td class="tg-0lax">@Html.DisplayFor(model => anime.anime.romajiTitle)</td>
+                        <td class="tg-0lax">NoN</td>
+                        <td class="tg-0lax">@Html.DisplayFor(model => anime.anime.averageScore)</td>
+                        <td class="tg-0lax">@Html.DisplayFor(model => anime.anime.episodes)</td>
+                        <td class="tg-0lax">@Html.DisplayFor(model => anime.anime.format)</td>
+                        <td class="tg-0lax">@Html.DisplayFor(model => anime.anime.studio.name)</td>
+                        @if (UserManager.GetUserName(User) == ViewData["userAspId"].ToString())
+                        {
+                            <td class="tg-0lax">
+                                @* <a asp-controller="User" asp-action="Delete" asp-route-animeId="@anime.anime.animeId">smazat</a> *@
+                                <form class="deleteFromList" asp-controller="User" asp-route-animeId="@anime.anime.animeId" asp-route-type="anime" asp-route-userName="@UserManager.GetUserName(User)" asp-action="Delete">
+                                    @* <input type="hidden" asp-for="@anime.anime.animeId"/> *@
+                                    <input type="submit" value="Delete" class="submitLink"/>
+                                </form>
+                            </td>
+                        }
+                    </tr>
+                }
+            }
+            catch(Exception e)
+            {
+            }
+        </table>
+    }
+</div>

@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<MoYobuDb.Models.Tables.Studio>
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Prohlížení studia";
+    Layout = "_Layout_BROWSE_STUDIO";
+}
+@foreach (var item in Model)
+{
+    <a asp-controller="Studios" asp-action="Details" asp-route-id="@item.studioId">
+        <div class="img-box">
+@*             @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin")) *@
+@*             { *@
+@*                 <a asp-controller="Studios" asp-action="Edit" asp-route-id="@item.studioId"> *@
+@*                     @Html.DisplayFor(model => item.name) *@
+@*                 </a> *@
+@*             } *@
+            @* else *@
+            @* { *@
+                @Html.DisplayFor(model => item.name)
+            @* } *@
+
+        </div>
+    </a>
+}
+<partial name="_Paginace"/>

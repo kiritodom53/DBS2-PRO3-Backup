@@ -1,0 +1,19 @@
+﻿@model IEnumerable<MoYobuDb.Models.Tables.User>
+
+@{
+    ViewBag.Title = "Žádosti";
+    Layout = "_Layout_FORMS";
+}
+
+
+<div class="prava">
+    @foreach (var item in Model)
+    {
+@* @Html.DisplayFor(modelItem => item.username) *@
+        <form asp-controller="User" asp-action="ApproveRights" asp-route-userId="@item.userId" style="grid-template-columns: 1fr;">
+            <div class="form-group">
+                <input type="submit" value="Schválit práva pro uživatele - @item.username" class="btn btn-default"/>
+            </div>
+        </form>
+    }
+</div>

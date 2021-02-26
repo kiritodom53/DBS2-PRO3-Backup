@@ -1,0 +1,64 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model MoYobuDb.Models.Tables.Character
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Detal postavy";
+    Layout = "_Layout_CHARACTERS";
+}
+
+
+@* <img src="char.jpg" alt="charakter" srcset=""/> *@
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <a asp-controller="Characters" asp-action="Edit" asp-route-id="@Model.characterId">
+        @if (Model.mediumImgUrl == null)
+        {
+            <img src="~/images/noimg.png" alt="charakter"/>
+        }
+        else if (Model.mediumImgUrl.Split("/")[0] == "uploads")
+        {
+            <img src="~/@Model.mediumImgUrl" alt="charakter"/>
+        }
+        else
+        {
+            <img src="@Model.mediumImgUrl" alt="charakter"/>
+        }
+    </a>
+}
+else
+{
+    @if (Model.mediumImgUrl == null)
+    {
+        <img src="~/images/noimg.png" alt="charakter"/>
+    }
+    else if (Model.mediumImgUrl.Split("/")[0] == "uploads")
+    {
+        <img src="~/@Model.mediumImgUrl" alt="charakter"/>
+    }
+    else
+    {
+        <img src="@Model.mediumImgUrl" alt="charakter"/>
+    }
+}
+
+
+<div class="desc-postavy">
+    <p class="p1">
+        <b>Jméno</b>
+    </p>
+    <p class="p2">
+        @Html.DisplayFor(model => model.name)
+    </p>
+    <p class="p1">
+        <b>Rodné jméno </b>
+    </p>
+    <p class="p2">@Html.DisplayFor(model => model.nameNative)</p>
+    <p class="p1">
+        <b>Popis </b>
+    </p>
+    <p class="p2">
+        @Html.DisplayFor(model => model.description)
+    </p>
+</div>

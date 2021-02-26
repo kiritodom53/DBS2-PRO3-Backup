@@ -1,0 +1,169 @@
+﻿@model IEnumerable<MoYobuDb.Models.Tables.MyList>
+@using Castle.Core.Internal
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "MangaList";
+    Layout = "_Layout_USER2";
+}
+<div class="tg-wrap">
+
+    <br>
+    <select name="listName" id="listName" asp-items="ViewBag.mangaLists"></select>
+    @foreach (var item in Model)
+    {
+        <h2>@Html.DisplayFor(model => item.name)</h2>
+
+        <table id="tg-JZbHy" class="tg">
+            <tr>
+                <th class="tg-0lax notSort"></th>
+                <th class="tg-0lax jmeno">Jméno</th>
+                <th class="tg-0lax">Moje skóre</th>
+                <th class="tg-0lax">Průměrné skóre</th>
+                <th class="tg-0lax">Počet kapitol</th>
+                <th class="tg-0lax">Formát</th>
+                <th class="tg-0lax">Status</th>
+                @if (UserManager.GetUserName(User) == ViewData["userAspId"].ToString())
+                {
+                    <th class="tg-0lax">Smazat</th>
+                }
+            </tr>
+            @try
+            {
+                @foreach (var manga in item.mangaLists)
+                {
+                    <tr>
+                        <td class="tg-0lax img">
+                            @* <img src="cover.jpg" alt="coverIMG"/> *@
+                            <a asp-controller="Manga" asp-action="Details" asp-route-id="@manga.manga.mangaId" asp-route-name="@manga.manga.romajiTitle">
+                                @if (!manga.manga.img.IsNullOrEmpty())
+                                {
+                                    if (manga.manga.img.Split('/')[0] == "uploads")
+                                    {
+                                        <img class="cover" src="~/@Html.DisplayFor(model => manga.manga.img)" alt="cover"/>
+                                    }
+                                    else
+                                    {
+                                        <img class="cover" src="@Html.DisplayFor(model => manga.manga.img)" alt="cover"/>
+                                    }
+                                }
+                                else
+                                {
+                                    <img class="cover" src="~/images/noimg.png" alt="cover"/>
+                                }
+                            </a>
+                        </td>
+                        <td class="tg-0lax">@Html.DisplayFor(model => manga.manga.romajiTitle)</td>
+                        <td class="tg-0lax">6</td>
+                        <td class="tg-0lax">@Html.DisplayFor(model => manga.manga.score)</td>
+                        <td class="tg-0lax">@Html.DisplayFor(model => manga.manga.chapters)</td>
+                        <td class="tg-0lax">@Html.DisplayFor(model => manga.manga.format)</td>
+                        <td class="tg-0lax">@Html.DisplayFor(model => manga.manga.status)</td>
+                        @if (UserManager.GetUserName(User) == ViewData["userAspId"].ToString())
+                        {
+                            <td class="tg-0lax">
+                                @* <a asp-controller="User" asp-action="Delete" asp-route-animeId="@anime.anime.animeId">smazat</a> *@
+                                <form class="deleteFromList" asp-controller="User" asp-route-animeId="@manga.manga.mangaId" asp-route-type="manga" asp-route-userName="@UserManager.GetUserName(User)" asp-action="Delete">
+                                    @* <input type="hidden" asp-for="@anime.anime.animeId"/> *@
+                                    <input type="submit" value="Delete" class="submitLink"/>
+                                </form>
+                            </td>
+@*                             <form class="deleteFromList" id="delete" asp-action="Delete"> *@
+                            // </form>
+                        }
+                    </tr>
+                }
+            }
+            catch(Exception e)
+            {
+            }
+        </table>
+    }
+</div>
+@* <h2>title</h2> *@
+@* *@
+@* <table> *@
+@*     <tbody> *@
+@*     <tr> *@
+@*         <td> *@
+@*             <strong>@Html.DisplayNameFor(modelItem => modelItem.name)</strong> | *@
+@*         </td> *@
+@*         <td> *@
+@*             <strong>@Html.DisplayNameFor(modelItem => modelItem.type)</strong> | *@
+@*         </td> *@
+@*         <td> *@
+@*             <strong>@Html.DisplayNameFor(modelItem => modelItem.listId)</strong> | *@
+@*         </td> *@
+@*         <td> *@
+@*             <strong>@Html.DisplayNameFor(modelItem => modelItem.userId)</strong> *@
+@*         </td> *@
+@*     </tr> *@
+@*     @foreach (var item in Model) *@
+@*     { *@
+@*         <tr> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.name) | *@
+@*             </td> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.type) | *@
+@*             </td> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.listId) | *@
+@*             </td> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.userId) *@
+@*             </td> *@
+@*         </tr> *@
+@*     } *@
+@*     </tbody> *@
+@* </table> *@
+@* *@
+@* *@
+@* <table> *@
+@*     <tbody> *@
+@*     <tr> *@
+@*         <td> *@
+@*             @Html.DisplayNameFor(modelItem => modelItem.mangaLists[0].manga.romajiTitle) | *@
+@*         </td> *@
+@*     </tr> *@
+@*     <tr> *@
+@*         <td> *@
+@*             <strong> *@
+@*                 <a asp-action="AnimeList" asp-route-listName="All">Všechny</a> *@
+@*             </strong> *@
+@*         </td> *@
+@*     </tr> *@
+@*     @foreach (var item in Model) *@
+@*     { *@
+@*         <tr> *@
+@*             <td> *@
+@*                 <strong> *@
+@*                     <a asp-action="MangaList" asp-route-listName="@item.name">@Html.DisplayFor(modelItem => item.name)</a> *@
+@*                 </strong> *@
+@*             </td> *@
+@*         </tr> *@
+@*         try *@
+@*         { *@
+@*             foreach (var item2 in item.mangaLists) *@
+@*             { *@
+@*                 <tr> *@
+@*                     <td> *@
+@*                         @Html.DisplayFor(modelItem => item2.manga.romajiTitle) | *@
+@*                     </td> *@
+@*                     <td> *@
+@*                         @Html.DisplayFor(modelItem => item2.manga.englishTitle) | *@
+@*                     </td> *@
+@*                 </tr> *@
+@*             } *@
+@*         } *@
+@*         catch(Exception e) *@
+@*         { *@
+@*             Console.WriteLine(e); *@
+@*             //throw; *@
+@*         } *@
+@*     } *@
+@*     </tbody> *@
+@* </table> *@
